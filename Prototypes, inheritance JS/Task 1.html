@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прототипы, наследование. Задание 1</title>
+</head>
+<body>
+    <script>
+        Number.prototype.plus = function(num) {
+  return this.valueOf() + num;
+};
+
+console.log((3).plus(5)); 
+    </script>
+</body>
+</html>

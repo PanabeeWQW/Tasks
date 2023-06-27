@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Функции. Задание 1</title>
+</head>
+<body>
+    <script>
+        function count(num) {
+  if (typeof num === 'number') {
+    return function nextCount(nextNum) {
+      if (typeof nextNum === 'number') {
+        return count(num + nextNum);
+      }
+      return num;
+    };
+  }
+  return num;
+}
+
+console.log(count(3)(2)(1)(5)(7));
+console.log(count(3)(null)(1)('asad')());
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Асинхронная работа в JS. Задание 1</title>
+</head>
+<body>
+    <script>
+        console.log("start");
+setTimeout(() => console.log("timeout"), 0);
+new Promise((resolve, reject) => {
+  console.log("promise constructor");
+  reject();
+})
+.then(() => console.log("p1"))
+.catch(() => console.log("p2"))
+.catch(() => console.log("p3"))
+.then(() => console.log("p4"))
+.then(() => console.log("p5"));
+console.log("final");
+    // В консоль будет выведено:
+    // start
+    // promise constructor
+    // final
+    // p2
+    // p4
+
+// Объяснение кода: 
+// 1.	Сначала выводится строка "start".
+// 2.	Затем выполняется асинхронный код setTimeout(() => console.log("timeout"), 0). Этот код будет помещен в очередь задач, но не будет выполнен сразу, так как установлено нулевое время ожидания.
+// 3.	Создается новый Promise. В конструкторе Promise выводится строка "promise constructor". Затем промис вызывает функцию reject(), что означает отклонение промиса.
+// 4.	Промис переходит в состояние "отклонено" и передает управление следующему обработчику catch().
+// 5.	Вызывается обработчик catch(), и выводится строка "p2".
+// 6.	После этого следующий обработчик catch() не срабатывает, так как промис уже обработан, и управление передается следующему блоку then().
+// 7.	Вызывается обработчик then() и выводится строка "p4".
+// 8.	Затем вызывается последний обработчик then() и выводится строка "p5".
+// 9.	Завершается выполнение всех обработчиков then() и catch().
+// 10.	Завершающая строка "final" выводится в консоль.
+
+    </script>
+</body>
+</html>
